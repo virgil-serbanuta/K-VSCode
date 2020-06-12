@@ -27,10 +27,8 @@
 			<string>comment.line.k</string>
 		</dict>
 		<dict>
-			<key>begin</key>
-			<string>"</string>
-			<key>end</key>
-			<string>"</string>
+			<key>match</key>
+			<string>"([^\\"]*(\\.)?)*"</string>
 			<key>name</key>
 			<string>string.quoted.double.k</string>
 			<key>patterns</key>
@@ -63,6 +61,12 @@
 			</array>
 		</dict>
 		<dict>
+			<key>match</key> <!--> Colour blue  <-->
+			<string>(\b(syntax (left|priority|priorities|non-assoc))\b)</string>
+			<key>name</key>
+			<string>keyword.reserved.k</string>
+		</dict>
+		<dict>
 			<key>match</key> <!--> Colour RED!!! <-->
 			<string>\b(syntax(\s)+([a-z]|[a-z]\S+|[0-9]|[0-9]\S+))\b</string>
 			<key>name</key>
@@ -82,13 +86,25 @@
 		</dict>
 		<dict>
 		    <key>match</key> <!--> Colour Light-red <-->
-			<string>\b(strict|avoid|prefer|bracket|non-assoc|seqstrict|left|right|macro|token|notInRules|autoReject|structural|latex|binder)\b</string>
+			<string>\b(strict|avoid|prefer|bracket|non-assoc|seqstrict|left|right|macro|token|notInRules|autoReject|structural|latex|binder|klabel|symbol|amb|hook|unit|function|functional)\b</string>
 			<key>name</key>
 			<string>string.regexp.k</string>
 		</dict>
 		<dict>
 			<key>match</key> <!--> Colour blue  <-->
-			<string>\b(syntax|rule|Id|Int|Bool|String|configuration|imports|Token|Lexer|Float|requires|Kresult|context)\b</string>
+			<string>(\b(syntax|rule|Id|Int|Bool|String|configuration|imports|Token|Lexer|Float|requires|ensures|when|Kresult|context|Bag|priority|KItem|K)\b)</string>
+			<key>name</key>
+			<string>keyword.reserved.k</string>
+		</dict>
+		<dict>
+			<key>match</key> <!--> Colour blue  <-->
+			<string>(#as|#True|#False|#And|#Or|#Not|#Implies|#Iff|#Equals|#Ceil|#Floor|#Exists|#Forall|#AG|#wEF|\.Bag|#fun\b)</string>
+			<key>name</key>
+			<string>keyword.reserved.k</string>
+		</dict>
+		<dict>
+			<key>match</key> <!--> Colour blue  <-->
+			<string>(=>|\.\.\.|::=|~>)</string>
 			<key>name</key>
 			<string>keyword.reserved.k</string>
 		</dict>
