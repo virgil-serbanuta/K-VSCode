@@ -70,7 +70,7 @@
 			<key>match</key> <!--> Colour RED!!! <-->
 			<string>\b(syntax(\s)+([a-z]|[a-z]\S+|[0-9]|[0-9]\S+))\b</string>
 			<key>name</key>
-			<string>error-token</string>
+			<string>invalid.illegal.k</string>
 		</dict>
 		<dict>
 			<key>match</key> <!--> Colour light-blue <-->
@@ -100,37 +100,37 @@
 			<key>match</key> <!--> Colour blue  <-->
 			<string>(\b(Id|Int|Bool|String|Token|Lexer|Float|Kresult|List|Map|Set|Bag|KItem|K|KList)\b)</string>
 			<key>name</key>
-			<string>keyword.reserved.k</string>
+			<string>support.type.k</string>
 		</dict>
 		<dict>
 			<key>match</key> <!--> Colour blue  <-->
 			<string>((\.List|\.Map|\.Set|\.Bag|\.K|\.KList)\b)</string>
 			<key>name</key>
-			<string>keyword.reserved.k</string>
+			<string>support.type.k</string>
 		</dict>
 		<dict>
 			<key>match</key> <!--> Colour blue  <-->
 			<string>(\b(ListItem|SetItem|BagItem)\b)</string>
 			<key>name</key>
-			<string>keyword.reserved.k</string>
+			<string>support.type.k</string>
 		</dict>
 		<dict>
 			<key>match</key> <!--> Colour blue  <-->
 			<string>(~>|\|->)</string>
 			<key>name</key>
-			<string>keyword.reserved.k</string>
+			<string>support.type.k</string>
 		</dict>
 		<dict>
 			<key>match</key> <!--> Colour blue  <-->
 			<string>(<Int|<=Int|>Int|>=Int|==Int|!=Int|<Float|<=Float|>Float|>=Float|==Float|!=Float|<String|<=String|>String|>=String|==String|!=String)\b</string>
 			<key>name</key>
-			<string>keyword.reserved.k</string>
+			<string>support.type.k</string>
 		</dict>
 		<dict>
 			<key>match</key> <!--> Colour blue  <-->
 			<string>(#as|#True|#False|#And|#Or|#Not|#Implies|#Iff|#Equals|#Ceil|#Floor|#Exists|#Forall|#Rewrites|#AG|#wEF|\.Bag|#fun\b)</string>
 			<key>name</key>
-			<string>keyword.reserved.k</string>
+			<string>support.reserved.k</string>
 		</dict>
 		<dict>
 			<key>match</key> <!--> Colour blue  <-->
