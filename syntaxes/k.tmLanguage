@@ -28,7 +28,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>"([^\\"]*(\\.)?)*"</string>
+			<string>r?"([^\\"]*(\\.)?)*"</string>
 			<key>name</key>
 			<string>string.quoted.double.k</string>
 			<key>patterns</key>
@@ -62,7 +62,7 @@
 		</dict>
 		<dict>
 			<key>match</key> <!--> Colour blue  <-->
-			<string>(\b(syntax (left|priority|priorities|non-assoc))\b)</string>
+			<string>(\b(syntax (left|right|non-assoc|priority|priorities))\b)</string>
 			<key>name</key>
 			<string>keyword.reserved.k</string>
 		</dict>
@@ -92,19 +92,43 @@
 		</dict>
 		<dict>
 			<key>match</key> <!--> Colour blue  <-->
-			<string>(\b(syntax|rule|Id|Int|Bool|String|configuration|imports|Token|Lexer|Float|requires|ensures|when|Kresult|context|Bag|priority|KItem|K)\b)</string>
+			<string>(\b(imports|syntax|context|configuration|rule|requires|ensures|when)\b)</string>
 			<key>name</key>
 			<string>keyword.reserved.k</string>
 		</dict>
 		<dict>
 			<key>match</key> <!--> Colour blue  <-->
-			<string>(#as|#True|#False|#And|#Or|#Not|#Implies|#Iff|#Equals|#Ceil|#Floor|#Exists|#Forall|#AG|#wEF|\.Bag|#fun\b)</string>
+			<string>(\b(Id|Int|Bool|String|Token|Lexer|Float|Kresult|List|Map|Set|Bag|KItem|K|KList)\b)</string>
 			<key>name</key>
 			<string>keyword.reserved.k</string>
 		</dict>
 		<dict>
 			<key>match</key> <!--> Colour blue  <-->
-			<string>(=>|\.\.\.|::=|~>)</string>
+			<string>((\.List|\.Map|\.Set|\.Bag|\.K|\.KList)\b)</string>
+			<key>name</key>
+			<string>keyword.reserved.k</string>
+		</dict>
+		<dict>
+			<key>match</key> <!--> Colour blue  <-->
+			<string>(\b(ListItem|SetItem|BagItem)\b)</string>
+			<key>name</key>
+			<string>keyword.reserved.k</string>
+		</dict>
+		<dict>
+			<key>match</key> <!--> Colour blue  <-->
+			<string>(~>|\|->)</string>
+			<key>name</key>
+			<string>keyword.reserved.k</string>
+		</dict>
+		<dict>
+			<key>match</key> <!--> Colour blue  <-->
+			<string>(#as|#True|#False|#And|#Or|#Not|#Implies|#Iff|#Equals|#Ceil|#Floor|#Exists|#Forall|#Rewrites|#AG|#wEF|\.Bag|#fun\b)</string>
+			<key>name</key>
+			<string>keyword.reserved.k</string>
+		</dict>
+		<dict>
+			<key>match</key> <!--> Colour blue  <-->
+			<string>(=>|\.\.\.|::=|::|:>)</string>
 			<key>name</key>
 			<string>keyword.reserved.k</string>
 		</dict>
