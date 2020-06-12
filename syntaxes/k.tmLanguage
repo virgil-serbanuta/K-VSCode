@@ -122,6 +122,12 @@
 		</dict>
 		<dict>
 			<key>match</key> <!--> Colour blue  <-->
+			<string>(<Int|<=Int|>Int|>=Int|==Int|!=Int|<Float|<=Float|>Float|>=Float|==Float|!=Float|<String|<=String|>String|>=String|==String|!=String)\b</string>
+			<key>name</key>
+			<string>keyword.reserved.k</string>
+		</dict>
+		<dict>
+			<key>match</key> <!--> Colour blue  <-->
 			<string>(#as|#True|#False|#And|#Or|#Not|#Implies|#Iff|#Equals|#Ceil|#Floor|#Exists|#Forall|#Rewrites|#AG|#wEF|\.Bag|#fun\b)</string>
 			<key>name</key>
 			<string>keyword.reserved.k</string>
