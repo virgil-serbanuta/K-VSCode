@@ -80,15 +80,26 @@
 		</dict>
 		<dict>
 			<key>match</key> <!--> Colour light-blue <-->
-			<string>HOLE</string>
+			<string>HOLE|HERE</string>
 			<key>name</key>
 			<string>support.type.property-name.k</string>
 		</dict>
 		<dict>
-		    <key>match</key> <!--> Colour Light-red <-->
-			<string>\b(strict|avoid|prefer|bracket|non-assoc|seqstrict|left|right|macro|token|notInRules|autoReject|structural|latex|binder|klabel|symbol|amb|hook|unit|function|functional)\b</string>
+			<key>begin</key>
+			<string>\[</string>
+			<key>end</key>
+			<string>\]</string>
 			<key>name</key>
-			<string>string.regexp.k</string>
+			<string>support.type.property-name.k</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key> <!--> Colour Light-red <-->
+					<string>\b(strict|avoid|prefer|bracket|non-assoc|seqstrict|left|right|macro|token|notInRules|autoReject|structural|latex|binder|klabel|symbol|amb|hook|unit|function|functional|result|assoc|comm|idem|element|format|smtlib|anywhere)\b</string>
+					<key>name</key>
+					<string>string.regexp.k</string>
+				</dict>
+			</array>
 		</dict>
 		<dict>
 			<key>match</key> <!--> Colour blue  <-->
@@ -120,6 +131,7 @@
 			<key>name</key>
 			<string>support.type.k</string>
 		</dict>
+
 		<dict>
 			<key>match</key> <!--> Colour blue  <-->
 			<string>(<Int|<=Int|>Int|>=Int|==Int|!=Int|<Float|<=Float|>Float|>=Float|==Float|!=Float|<String|<=String|>String|>=String|==String|!=String)\b</string>
@@ -128,9 +140,22 @@
 		</dict>
 		<dict>
 			<key>match</key> <!--> Colour blue  <-->
+			<string>\b(true|false|notBool|andBool|andThenBool|xorBool|orBool|orElseBool|impliesBool)\b</string>
+			<key>name</key>
+			<string>support.type.k</string>
+		</dict>
+		<dict>
+			<key>match</key> <!--> Colour blue  <-->
+			<string>=(/)?=[\w]+\b</string>
+			<key>name</key>
+			<string>support.type.k</string>
+		</dict>
+
+		<dict>
+			<key>match</key> <!--> Colour blue  <-->
 			<string>(#as|#True|#False|#And|#Or|#Not|#Implies|#Iff|#Equals|#Ceil|#Floor|#Exists|#Forall|#Rewrites|#AG|#wEF|\.Bag|#fun\b)</string>
 			<key>name</key>
-			<string>support.reserved.k</string>
+			<string>keyword.control.flow</string><!--support.reserved.k-->
 		</dict>
 		<dict>
 			<key>match</key> <!--> Colour blue  <-->
@@ -144,9 +169,16 @@
 			<key>name</key>
 			<string>keyword.module.k</string>
 		</dict>
+
 		<dict>
 			<key>match</key> <!--> Colour Light green <-->
 			<string>(-|\.)?\b[0-9]+(\.[0-9]+)?\b</string>
+			<key>name</key>
+			<string>constant.numeric.k</string>
+		</dict>
+		<dict>
+			<key>match</key> <!--> Colour blue  <-->
+			<string>\b(true|false)\b</string>
 			<key>name</key>
 			<string>constant.numeric.k</string>
 		</dict>
@@ -154,7 +186,7 @@
 		<!-- tag -->
 		<dict>
 			<key>begin</key>
-			<string>(&lt;)\s*([\w\d\-\_]+)</string>
+			<string>(&lt;)\s*(\w[\w\d\-\_]*)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
