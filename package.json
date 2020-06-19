@@ -48,7 +48,7 @@
             {
                 "language": "kframework",
                 "scopeName": "text.k",
-                "path": "./syntaxes/k.tmLanguage"
+                "path": "./syntaxes/k.json"
             }
         ],
         "snippets": [
