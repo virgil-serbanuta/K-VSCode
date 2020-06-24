@@ -21,7 +21,7 @@
     {
       "comment": "module NAME [attributes] .... endmodule",
 
-      "begin": "^\\s*(module)\\s+([^\\s]+)\\s*((?:\\[[^\\[\\]]*\\])?)$",
+      "begin": "^\\s*(module)\\s+([^\\s]+)(?=[^a-zA-Z-])\\s*((?:\\[[^\\[\\]]*\\])?)",
       "beginCaptures": {
         "1": {"name": "keyword.module.k"},
         "2": {"name": "entity.name.section.modulename.k"},
@@ -103,46 +103,6 @@
           ]
         },
         {
-          "comment": "syntax Sort ::= thing | thing [attributes]",
-
-          "begin": "\\b(syntax)\\b",
-          "beginCaptures": {
-            "0": {"name": "keyword.syntax.k"}
-          },
-
-          "end": "(?=(\\b(imports|syntax|context|configuration|rule|endmodule)\\b))",
-
-          "name":"section.syntax.k",
-
-          "patterns": [
-            {"include": "#strings_or_comments"},
-            {"include": "#attributes"},
-            {
-              "match": "::=|>|\\|",
-              "name": "keyword.syntax.punctuation.k"
-            },
-            {"include": "#punctuation"}
-          ]
-        },
-        {
-          "comment": "syntax associativity left a b",
-
-          "begin": "\\b(syntax\\s+(associativity\\s+)?(left|right))\\b",
-          "beginCaptures": {
-            "0": {"name": "keyword.syntax.k"}
-          },
-
-          "end": "(?=(\\b(imports|syntax|context|configuration|rule|endmodule)\\b))",
-
-          "name":"section.syntax.k",
-
-          "patterns": [
-            {"include": "#strings_or_comments"},
-            {"include": "#attributes"},
-            {"include": "#punctuation"}
-          ]
-        },
-        {
           "comment": "syntax priority a > b c > d",
 
           "begin": "\\b(syntax\\s+(priority|priorities))\\b",
@@ -165,13 +125,61 @@
           ]
         },
         {
+          "comment": "syntax associativity left a b",
+
+          "begin": "\\b(syntax\\s+(associativity\\s+)?(left|right|non-assoc))\\b",
+          "beginCaptures": {
+            "0": {"name": "keyword.syntax.k"}
+          },
+
+          "end": "(?=(\\b(imports|syntax|context|configuration|rule|endmodule)\\b))",
+
+          "name":"section.syntax.k",
+
+          "patterns": [
+            {"include": "#strings_or_comments"},
+            {"include": "#attributes"},
+            {"include": "#punctuation"}
+          ]
+        },
+        {
+          "comment": "syntax Sort ::= thing | thing [attributes]",
+
+          "begin": "\\b(syntax)\\b",
+          "beginCaptures": {
+            "0": {"name": "keyword.syntax.k"}
+          },
+
+          "end": "(?=(\\b(imports|syntax|context|configuration|rule|endmodule)\\b))",
+
+          "name":"section.syntax.k",
+
+          "patterns": [
+            {"include": "#strings_or_comments"},
+            {"include": "#attributes"},
+            {
+              "comment": "Need to figure out how to use the captures here.",
+              "match": "(>)\\s*(left|right)\\s*(:)",
+              "name": "keyword.syntax.punctuation.k"
+            },
+            {
+              "match": "::=|>|\\|",
+              "name": "keyword.syntax.punctuation.k"
+            },
+            {"include": "#punctuation"}
+          ]
+        },
+        {
           "comment": "context alias [rval]: elaborate(HERE) [result(Resolved), context(elaborate)]",
 
-          "begin": "\\b(context)\\s+(alias)\\s*(\\[[^\\]]*\\]:)",
+          "begin": "\\b(context)\\s+(alias)\\s*(\\[)([^\\]]*)(\\])(:)",
           "beginCaptures": {
             "1": {"name": "keyword.context.k"},
             "2": {"name": "keyword.context.k"},
-            "3": {"name": "entity.name.context-alias.k"}
+            "3": {"name": "keyword.context.punctuation.k"},
+            "4": {"name": "entity.name.context-alias.k"},
+            "5": {"name": "keyword.context.punctuation.k"},
+            "6": {"name": "keyword.context.punctuation.k"}
           },
 
           "end": "(?=(\\b(imports|syntax|context|configuration|rule|endmodule)\\b))",
@@ -258,7 +266,8 @@
       ]
     },
     "attribute_name": {
-      "match": "\\b(strict|avoid|prefer|bracket|non-assoc|seqstrict|left|right|macro|token|notInRules|autoReject|structural|latex|binder|klabel|symbol|amb|hook|unit|function|functional|result|assoc|comm|idem|element|format|smtlib|anywhere|context|smt-hook|owise|label)\\b",
+      "comment": "Is 'amb' really an attribute?",
+      "match": "\\b(strict|avoid|prefer|bracket|non-assoc|seqstrict|left|right|macro|token|notInRules|autoReject|structural|latex|binder|klabel|symbol|amb|hook|unit|function|functional|result|assoc|comm|idem|element|format|smtlib|anywhere|context|smt-hook|owise|label|hybrid)\\b",
       "name": "entity.name.attribute.k"
     },
     "attributes": {
@@ -279,6 +288,10 @@
         {"include": "#attribute_name"}
       ]
     },
+    "k_quote": {
+      "match": "`[^`]+`",
+      "name": "entity.name.quoted-klabel.k"
+    },
     "context_alias_configuration_patterns": {
       "patterns": [
         {"include": "#strings_or_comments"},
@@ -289,7 +302,12 @@
         {"include": "#predefined"},
         {"include": "#punctuation"},
         {"include": "#configuration_tags"},
-        {"include": "#user_operators_low_priority"}
+        {"include": "#user_operators_low_priority"},
+        {"include": "#k_quote"},
+        {
+          "match": "\\brequires\\b",
+          "name": "keyword.syntax.k"
+        }
       ]
     },
     "rule_patterns": {
@@ -327,7 +345,8 @@
           "name": "keyword.syntax.k"
         },
         {"include": "#configuration_tags"},
-        {"include": "#user_operators_low_priority"}
+        {"include": "#user_operators_low_priority"},
+        {"include": "#k_quote"}
       ]
     },
     "configuration_open_tag": {
@@ -490,7 +509,7 @@
       "name": "constant.numeric.k"
     },
     "predefined_sorts": {
-      "match": "\\b(Id|Int|Bool|String|MInt|Token|Lexer|Float|Kresult|List|Map|Set|Bag|KItem|K|KList)\\b",
+      "match": "\\b(Id|Int|Bool|String|MInt|Float|List|Map|Set|Bag|Token|Lexer|Kresult|KItem|K|KList|KLabel)\\b",
       "name": "support.type.k"
     },
     "predefined_symbols": {
