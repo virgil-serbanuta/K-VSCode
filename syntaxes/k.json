@@ -70,12 +70,13 @@
         {
           "comment": "rule [context]: left => right [attributes]",
 
-          "begin": "\\b(rule)\\s*(\\[)([^\\[\\]]*)(\\]):",
+          "begin": "\\b(rule)\\s*(\\[)([^\\[\\]]*)(\\])(:)",
           "beginCaptures": {
             "1": {"name": "keyword.rule.k"},
             "2": {"name": "punctuation.rule.context.k"},
             "3": {"name": "entity.name.context.k"},
-            "4": {"name": "punctuation.rule.context.k"}
+            "4": {"name": "punctuation.rule.context.k"},
+            "5": {"name": "keyword.rule.punctuation.k"}
           },
 
           "end": "(?=(\\b(imports|syntax|context|configuration|rule|endmodule)\\b))",
@@ -103,7 +104,7 @@
           ]
         },
         {
-          "comment": "syntax priority a > b c > d",
+          "comment": "syntax priority a > b c > d // Do I need the punctuation pattern?",
 
           "begin": "\\b(syntax\\s+(priority|priorities))\\b",
           "beginCaptures": {
@@ -125,7 +126,7 @@
           ]
         },
         {
-          "comment": "syntax associativity left a b",
+          "comment": "syntax associativity left a b // Do I need the punctuation pattern?",
 
           "begin": "\\b(syntax\\s+(associativity\\s+)?(left|right|non-assoc))\\b",
           "beginCaptures": {
@@ -166,11 +167,12 @@
               "match": "::=|>|\\|",
               "name": "keyword.syntax.punctuation.k"
             },
+            {"include": "#predefined_sorts"},
             {"include": "#punctuation"}
           ]
         },
         {
-          "comment": "context alias [rval]: elaborate(HERE) [result(Resolved), context(elaborate)]",
+          "comment": "context alias [rval]: elaborate(HERE) [result(Resolved), context(elaborate)]  // Can it have 'requires'?",
 
           "begin": "\\b(context)\\s+(alias)\\s*(\\[)([^\\]]*)(\\])(:)",
           "beginCaptures": {
@@ -267,7 +269,7 @@
     },
     "attribute_name": {
       "comment": "Is 'amb' really an attribute?",
-      "match": "\\b(strict|avoid|prefer|bracket|non-assoc|seqstrict|left|right|macro|token|notInRules|autoReject|structural|latex|binder|klabel|symbol|amb|hook|unit|function|functional|result|assoc|comm|idem|element|format|smtlib|anywhere|context|smt-hook|owise|label|hybrid)\\b",
+      "match": "\\b(strict|avoid|prefer|bracket|non-assoc|seqstrict|left|right|macro|macro-rec|token|autoReject|noAutoReject|structural|latex|binder|klabel|symbol|amb|hook|unit|function|functional|result|assoc|comm|idem|element|format|smtlib|anywhere|context|smt-hook|owise|label|hybrid)\\b",
       "name": "entity.name.attribute.k"
     },
     "attributes": {
@@ -330,6 +332,7 @@
             {"include": "#rule_patterns"}
           ]
         },
+        {"include": "#map_operators"},
         {"include": "#attributes"},
         {"include": "#constant"},
         {"include": "#rule_keywords"},
@@ -368,7 +371,7 @@
 
           "match": "([\\w\\d\\-\\_]+)\\s*\\=\\s*(\".+?\")",
           "captures": {
-            "1": {"name": "constant.regexp.emphasis.strong.tags.k"},
+            "1": {"name": "support.tag.attribute.k"},
             "2": {"name": "string.quoted.double.k"}
           }
         }
@@ -390,6 +393,27 @@
         {"include": "#configuration_closed_tag"}
       ]
     },
+    "map_operators": {
+      "comment": "map[key <- value]  // The key and the value should not include the full set of rule patterns.",
+      "match": "(\\[)([^\\[]*)(<-)([^\\[]*)(\\])",
+      "captures": {
+        "1": {"name": "punctuation.separator.k"},
+        "2": {
+          "name": "section.rule.map-key.k",
+          "patterns": [
+            {"include": "#rule_patterns"}
+          ]
+        },
+        "3": {"name": "keyword.operator.k"},
+        "4": {
+          "name": "section.rule.map-value.k",
+          "patterns": [
+            {"include": "#rule_patterns"}
+          ]
+        },
+        "5": {"name": "punctuation.separator.k"}
+      }
+    },
     "generic_operators": {
       "match": "\\?",
       "name": "keyword.operator.k"
@@ -397,6 +421,11 @@
     "equality_operators": {
       "comment": "==Int",
       "match": "(==|=/=)(Int|Float|String|MInt|Bool|K)\\b",
+      "name": "keyword.operator.k"
+    },
+    "match_operators": {
+      "comment": ":=K",
+      "match": ":=K|:/=K\\b",
       "name": "keyword.operator.k"
     },
     "comparison_operators": {
@@ -453,6 +482,7 @@
     "operators": {
       "patterns": [
         {"include": "#generic_operators"},
+        {"include": "#match_operators"},
         {"include": "#equality_operators"},
         {"include": "#comparison_operators"},
         {"include": "#number_operators"},
@@ -482,7 +512,7 @@
       ]
     },
     "keyword_punctuation": {
-      "match": "(=>|\\.\\.\\.|::=|::|:>)",
+      "match": "(=>|\\.\\.\\.|::=|::|:>|:)",
       "name": "keyword.reserved.k"
     },
     "ml_keywords": {
@@ -490,7 +520,7 @@
       "name": "keyword.control.flow"
     },
     "other_keywords": {
-      "match": "(#as|\\.Bag|#fun\\b)",
+      "match": "(#as|\\.Bag|#fun)\\b",
       "name": "keyword.control.flow"
     },
     "rule_keywords": {
@@ -513,7 +543,7 @@
       "name": "support.type.k"
     },
     "predefined_symbols": {
-      "match": "\\b(ListItem|SetItem|BagItem)\\b",
+      "match": "\\b(ListItem|SetItem|BagItem|keys|in|in_keys)\\b",
       "name": "support.symbol.k"
     },
     "predefined": {
