@@ -476,7 +476,7 @@
       "name": "keyword.operator.k"
     },
     "list_map_operators": {
-      "match": "~>|\\|->|<-",
+      "match": "~>|\\|->",
       "name": "keyword.operator.k"
     },
     "operators": {
@@ -517,11 +517,12 @@
     },
     "ml_keywords": {
       "match": "(#True|#False|#And|#Or|#Not|#Implies|#Iff|#Equals|#Ceil|#Floor|#Exists|#Forall|#Rewrites|#AG|#wEF\\b)",
-      "name": "keyword.control.flow"
+      "name": "keyword.control.flow.k"
     },
     "other_keywords": {
+      "comment": "is .Bag a keyword or an operator?",
       "match": "(#as|\\.Bag|#fun)\\b",
-      "name": "keyword.control.flow"
+      "name": "keyword.control.flow.k"
     },
     "rule_keywords": {
       "patterns": [
