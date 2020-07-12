@@ -61,7 +61,7 @@
 
           "end": "(?=(\\b(imports|syntax|context|configuration|rule|endmodule)\\b))",
 
-          "name":"section.imports.k",
+          "name": "section.imports.k",
 
           "patterns": [
             {"include": "#strings_or_comments"}
@@ -81,7 +81,7 @@
 
           "end": "(?=(\\b(imports|syntax|context|configuration|rule|endmodule)\\b))",
 
-          "name":"section.rule.k",
+          "name": "section.rule.k",
 
           "patterns": [
             {"include": "#rule_patterns"}
@@ -97,7 +97,7 @@
 
           "end": "(?=(\\b(imports|syntax|context|configuration|rule|endmodule)\\b))",
 
-          "name":"section.rule.k",
+          "name": "section.rule.k",
 
           "patterns": [
             {"include": "#rule_patterns"}
@@ -113,7 +113,7 @@
 
           "end": "(?=(\\b(imports|syntax|context|configuration|rule|endmodule)\\b))",
 
-          "name":"section.syntax.k",
+          "name": "section.syntax.k",
 
           "patterns": [
             {"include": "#strings_or_comments"},
@@ -135,7 +135,7 @@
 
           "end": "(?=(\\b(imports|syntax|context|configuration|rule|endmodule)\\b))",
 
-          "name":"section.syntax.k",
+          "name": "section.syntax.k",
 
           "patterns": [
             {"include": "#strings_or_comments"},
@@ -153,7 +153,7 @@
 
           "end": "(?=(\\b(imports|syntax|context|configuration|rule|endmodule)\\b))",
 
-          "name":"section.syntax.k",
+          "name": "section.syntax.k",
 
           "patterns": [
             {"include": "#strings_or_comments"},
@@ -186,7 +186,7 @@
 
           "end": "(?=(\\b(imports|syntax|context|configuration|rule|endmodule)\\b))",
 
-          "name":"section.context.k",
+          "name": "section.context.k",
 
           "patterns": [
             {"include": "#context_alias_configuration_patterns"},
@@ -203,7 +203,7 @@
 
           "end": "(?=(\\b(imports|syntax|context|configuration|rule|endmodule)\\b))",
 
-          "name":"section.context.k",
+          "name": "section.context.k",
 
           "patterns": [
             {"include": "#rule_patterns"},
@@ -220,7 +220,7 @@
 
           "end": "(?=(\\b(imports|syntax|context|configuration|rule|endmodule)\\b))",
 
-          "name":"section.configuration.k",
+          "name": "section.configuration.k",
 
           "patterns": [
             {"include": "#context_alias_configuration_patterns"}
@@ -372,7 +372,7 @@
           "match": "([\\w\\d\\-\\_]+)\\s*\\=\\s*(\".+?\")",
           "captures": {
             "1": {"name": "support.tag.attribute.k"},
-            "2": {"name": "string.quoted.double.k"}
+            "2": {"name": "string.value.quoted.double.k"}
           }
         }
       ]
